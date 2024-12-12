@@ -3,6 +3,7 @@ import { createContext, ReactNode, useState } from "react";
 export type dataType = {
   column: string[];
   data: number[][];
+  si?: number[];
 };
 interface AppContextType {
   search: string;
@@ -18,10 +19,12 @@ interface AppContextType {
   setLoading: (bool: boolean) => any;
   chartDataDemo: any[];
   setChartData: (data: any) => void;
+  checked: boolean;
+  setChecked: (data: any) => void;
 }
 
 export const AppContext = createContext<AppContextType>({
-  search: "AAPL",
+  search: "BABA",
   setSearch: (value: string) => {},
   selectedPeriod: "1D",
   setSelectedPeriod: (value: string) => {},
@@ -30,6 +33,7 @@ export const AppContext = createContext<AppContextType>({
   data: {
     column: [],
     data: [[]],
+    si: [],
   },
   setData: () => {},
   getChartData: () => {},
@@ -37,6 +41,8 @@ export const AppContext = createContext<AppContextType>({
   setLoading: () => {},
   chartDataDemo: [],
   setChartData: () => {},
+  checked: false,
+  setChecked: () => {},
 });
 
 // const chartData = data.map((entry, index) => ({
@@ -50,25 +56,36 @@ export const AppContext = createContext<AppContextType>({
 // }));
 
 export function AppContextProvider({ children }: { children: ReactNode }) {
-  const [search, setSearch] = useState("AAPL");
+  const [search, setSearch] = useState<string>("BABA");
   const [selectedPeriod, setSelectedPeriod] = useState("1D");
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState<dataType>({
     column: [],
     data: [[]],
+    si: [],
   });
   const [chartDataDemo, setChartData] = useState<any[]>([]);
   const [selectedChart, setSelectedChart] = useState<number>(1);
 
   function getChartData() {
-    const chartData = data.data.map((entry) => {
+    console.log(data.data);
+    let chartData = data.data.map((entry, index) => {
       return {
-        open: entry,
+        date: entry[0],
+        open: entry[1],
+        High: entry[2],
+        Low: entry[3],
+        Close: entry[4],
+        AdjClose: entry[5],
+        Volume: entry[6] / 1000000,
+        Anomaly: entry[7],
+        si: (data.si && data.si[index]) || 100,
       };
     });
+
     return chartData;
   }
-
+  const [checked, setChecked] = useState(false);
   // function setDataProps(data: dataType) {
   //   setData(data);
   // }
@@ -88,6 +105,8 @@ export function AppContextProvider({ children }: { children: ReactNode }) {
         setLoading,
         chartDataDemo,
         setChartData,
+        checked,
+        setChecked,
       }}>
       {children}
     </AppContext.Provider>

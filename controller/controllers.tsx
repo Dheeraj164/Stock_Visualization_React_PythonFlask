@@ -1,15 +1,12 @@
-import { Dispatch, useContext } from "react";
 import axios from "axios";
-import { AppContext, dataType } from "@/context/AppContext";
+import { dataType } from "@/context/AppContext";
 
-// const { setData } = useContext(AppContext);
 export async function getData(
   search: string,
   selectedPeriod: string,
   setData: (data: dataType) => void,
   setLoading: (bool: boolean) => void
 ) {
-  console.log("calling backend");
   setLoading(true);
   let end = new Date();
   let start: Date;
@@ -21,6 +18,8 @@ export async function getData(
     start = new Date(end.getTime() - 180 * 24 * 60 * 60 * 1000);
   } else if (selectedPeriod === "1Y") {
     start = new Date(end.getTime() - 365 * 24 * 60 * 60 * 1000);
+  } else if (selectedPeriod === "3Y") {
+    start = new Date(end.getTime() - 3 * 365 * 24 * 60 * 60 * 1000);
   } else {
     start = new Date("2010-01-01");
   }
@@ -35,9 +34,6 @@ export async function getData(
       end: end.toISOString().slice(0, 10),
     });
     const fetchedData = res.data.df_info;
-
-    // Log to verify correct data structure
-    // console.log("Fetched Data:", fetchedData);
 
     if (fetchedData) {
       setData(fetchedData);

@@ -18,7 +18,6 @@ export default function NewBarChart() {
   return (
     <div>
       <Card>
-        {" "}
         <ChartContainer config={chartConfig2}>
           <BarChart accessibilityLayer data={chartDataDemo}>
             <CartesianGrid vertical={false} />
@@ -31,7 +30,22 @@ export default function NewBarChart() {
             /> */}
             <ChartTooltip content={<ChartTooltipContent hideLabel />} />
             {/* <ChartLegend content={<ChartLegendContent />} /> */}
-            <Bar dataKey="open" stackId="a" fill="red" radius={[0, 0, 4, 4]} />
+            <div></div>
+            <Bar dataKey="open" stackId="a" fill="red" layout="vertical" />
+            <Bar dataKey="High" stackId="b" fill="blue" layout="vertical" />
+            <Bar dataKey="Low" stackId="c" fill="green" layout="vertical" />
+            <Bar
+              dataKey="Close"
+              stackId="d"
+              fill="pink"
+              radius={[0, 0, 4, 4]}
+            />
+            <Bar
+              dataKey="Volume"
+              stackId="e"
+              fill="maroon"
+              radius={[0, 0, 4, 4]}
+            />
           </BarChart>
         </ChartContainer>
         {search && (

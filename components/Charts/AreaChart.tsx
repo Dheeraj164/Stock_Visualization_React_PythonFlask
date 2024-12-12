@@ -42,6 +42,46 @@ export default function AreaChartComp() {
               fillOpacity={0.4}
               stroke="red"
             />
+            <Area
+              dataKey="High"
+              type="natural"
+              fill="blue"
+              stroke="blue"
+              fillOpacity={0.4}
+              dot={false}
+            />
+            <Area
+              dataKey="Low"
+              type="natural"
+              fill="green"
+              stroke="green"
+              fillOpacity={0.4}
+              dot={false}
+            />
+            <Area
+              dataKey="Close"
+              type="natural"
+              fill="pink"
+              stroke="pink"
+              fillOpacity={0.4}
+              dot={false}
+            />
+            <Area
+              dataKey="Volume"
+              type="natural"
+              fill="maroon"
+              stroke="maroon"
+              fillOpacity={0.4}
+              dot={false}
+            />
+            <Area
+              dataKey="si"
+              type="natural"
+              fill="maroon"
+              stroke="maroon"
+              fillOpacity={0.4}
+              dot={false}
+            />
           </AreaChart>
         </ChartContainer>
         {search && (

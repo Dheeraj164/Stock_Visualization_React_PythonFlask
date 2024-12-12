@@ -1,7 +1,11 @@
 import React, { useContext } from "react";
 import { CartesianGrid, Line, LineChart } from "recharts";
-import { ChartContainer } from "@/components/ui/chart";
-import { chartConfig2, chartData } from "@/model/chart_model";
+import {
+  ChartContainer,
+  ChartTooltip,
+  ChartTooltipContent,
+} from "@/components/ui/chart";
+import { chartConfig2 } from "@/model/chart_model";
 import Card from "../ui/card";
 import { AppContext, AppContextProvider } from "@/context/AppContext";
 
@@ -28,6 +32,10 @@ export default function LinearLineChart() {
               dot={false}
             />
             <CartesianGrid />
+            <ChartTooltip
+              cursor={false}
+              content={<ChartTooltipContent hideLabel />}
+            />
           </LineChart>
         </ChartContainer>
         {search && (

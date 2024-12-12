@@ -19,17 +19,18 @@ export default function Home() {
     data,
     setLoading,
     loading,
-    chartDataDemo,
     getChartData,
 
     setChartData,
   } = useContext(AppContext);
   // const [data, setData] = useState<any>({});
   useEffect(() => {
+    console.log(" use effect workingcalling");
     if (!loading && data && data.data.length > 0) {
       const newChartData = getChartData();
       setChartData(newChartData);
     } else if (loading) {
+      console.log("calling");
       getData(search, selectedPeriod, setData, setLoading);
     }
   }, [search, selectedPeriod, loading]);

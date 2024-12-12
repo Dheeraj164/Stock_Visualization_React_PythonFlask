@@ -1,6 +1,10 @@
 import React, { useContext } from "react";
 import { CartesianGrid, Line, LineChart } from "recharts";
-import { ChartContainer } from "@/components/ui/chart";
+import {
+  ChartContainer,
+  ChartTooltip,
+  ChartTooltipContent,
+} from "@/components/ui/chart";
 import Card from "@/components/ui/card";
 import { chartConfig2 } from "@/model/chart_model";
 import { AppContext, AppContextProvider } from "@/context/AppContext";
@@ -27,6 +31,11 @@ export default function StepChart() {
               dot={false}
               stroke="red"
               strokeWidth={2}
+            />
+
+            <ChartTooltip
+              cursor={false}
+              content={<ChartTooltipContent hideLabel />}
             />
           </LineChart>
         </ChartContainer>
